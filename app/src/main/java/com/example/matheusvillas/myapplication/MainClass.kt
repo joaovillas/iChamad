@@ -1,6 +1,5 @@
 package com.example.matheusvillas.myapplication
 
-import android.database.sqlite.SQLiteOpenHelper
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,11 +11,15 @@ class MainClass : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_class)
 
+        var context = this
         btn_insert.setOnClickListener({
-            if(input_matricula.text.toString().length>0 && input_nome.text.toString().length>0 && input_tel.text.toString().length>0 ){
+            if(etvMatricula.text.toString().length>0 && etvTelefone.text.toString().length>0 && etvNome.text.toString().length>0 ){
+                var professor = Professor(etvMatricula.toString(),etvNome.toString(),etvTelefone.toString())
+                var db = DBConnection(context)
+                db.insertDB(professor)
 
             }else{
-                Toast.makeText(this,"Por favor insira os campos corretamente",Toast.LENGTH_LONG)
+                Toast.makeText(this,"Por favor insira os campos corretamente",Toast.LENGTH_LONG).show()
             }
 
         })
